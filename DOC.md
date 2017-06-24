@@ -1,3 +1,3 @@
 ### Webpack plugin
 
-- https://github.com/robertknight/webpack-bundle-size-analyzer
+- https://github.com/th0r/webpack-bundle-analyzer
