@@ -1,6 +1,7 @@
 'use strict';
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
 
 const autoprefixer = require('autoprefixer');
 const path = require('path');
@@ -63,8 +64,12 @@ module.exports = {
     // Generated JS file names (with nested folders).
     // There will be one main bundle, and one file per asynchronous chunk.
     // We don't currently advertise code splitting but Webpack supports it.
-    filename: 'static/js/[name].[chunkhash:8].js',
-    chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
+    
+    // filename: 'static/js/[name].[chunkhash:8].js',
+    // chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
+    filename: 'static/js/[name].[chunkhash].js',
+    chunkFilename: 'static/js/[name].[chunkhash].chunk.js',
+
     // We inferred the "public path" (such as / or /my-project) from homepage.
     publicPath: publicPath,
     // Point sourcemap entries to original disk location
@@ -221,6 +226,31 @@ module.exports = {
     ],
   },
   plugins: [
+    
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendor',
+    //   children: true,
+    //   minChunks: 2,
+    //   async: true,
+    // }),
+
+    // https://github.com/insin/nwb/blob/fd4d97ea7c3540f4bcf84a2b19b9b0be9ae84fae/src/createWebpackConfig.js#L527
+    // Move modules imported from node_modules/ into a vendor chunk when enabled
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks(module, count) {
+        return (
+          module.resource &&
+          module.resource.includes('node_modules')
+        )
+      }
+    }),
+
+    // The Webpack manifest is normally folded into the last chunk, changing
+    // its hash - prevent this by extracting the manifest into its own
+    // chunk - also essential for deterministic hashing.
+    new webpack.optimize.CommonsChunkPlugin({name: 'manifest'}),
+
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
@@ -244,6 +274,14 @@ module.exports = {
         minifyURLs: true,
       },
     }),
+
+    // new PreloadWebpackPlugin(),
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      as: 'script',
+      include: ['main']
+    }),
+
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
     // It is absolutely essential that NODE_ENV was set to production here.

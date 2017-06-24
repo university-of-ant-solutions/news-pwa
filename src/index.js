@@ -9,19 +9,19 @@ import {
   Link
 } from 'react-router-dom'
 
-import Home from './PageHome';
-import About from './PageAbout';
-import Topics from './PageTopics';
+// import Home from './PageHome';
+// import About from './PageAbout';
+// import Topics from './PageTopics';
 
-// import asyncComponent from './AsyncComponent';
+import asyncComponent from './AsyncComponent';
 // OLD CODE STYLE
 // const Home = await require.ensure([], require => require('./Home').default, 'home');
-// const Home = asyncComponent(() => import('./PageHome')
-//   .then(module => module.default), { name: 'Home Page' });
-// const About = asyncComponent(() => import('./PageAbout')
-//   .then(module => module.default), { name: 'About Page' });
-// const Topics = asyncComponent(() => import('./PageTopics')
-//   .then(module => module.default), { name: 'Topics Page' });
+const Home = asyncComponent(() => import('./PageHome')
+  .then(module => module.default), { name: 'Home Page' });
+const About = asyncComponent(() => import('./PageAbout')
+  .then(module => module.default), { name: 'About Page' });
+const Topics = asyncComponent(() => import('./PageTopics')
+  .then(module => module.default), { name: 'Topics Page' });
 
 const BasicExample = () => (
   <Router>
