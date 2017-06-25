@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  nginx:
+    image: particle4dev/docker-nginx-boilerplate:latest
+    container_name: nginx
+    # command: tail -f /dev/null
+    volumes:
+      - ${PWD}/sites-enabled:/etc/nginx/sites-enabled:rw
+      - ${PWD}/sites-available:/etc/nginx/sites-available:rw
+      - ${PWD}/www:/data/www:rw
+      - ${PWD}/nginx-logs:/var/log/nginx
+      - ${PWD}/nginx-cache:/tmp/nginx/cache
+
+    ports:
+      - "80:80"
+      - "443:443"
