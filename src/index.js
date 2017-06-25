@@ -14,6 +14,8 @@ import {
 // import Topics from './PageTopics';
 
 import asyncComponent from './components/AsyncComponent';
+import ScrollToTop from './components/ScrollToTop';
+
 // OLD CODE STYLE
 // const Home = await require.ensure([], require => require('./Home').default, 'home');
 const Home = asyncComponent(() => import('./containers/PageHome')
@@ -25,19 +27,21 @@ const Topics = asyncComponent(() => import('./containers/PageTopics')
 
 const BasicExample = () => (
   <Router>
-    <div>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/topics">Topics</Link></li>
-      </ul>
+    <ScrollToTop>
+      <div>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/topics">Topics</Link></li>
+        </ul>
 
-      <hr/>
+        <hr/>
 
-      <Route exact path="/" component={Home}/>
-      <Route path="/about" component={About}/>
-      <Route path="/topics" component={Topics}/>
-    </div>
+        <Route exact path="/" component={Home}/>
+        <Route path="/about" component={About}/>
+        <Route path="/topics" component={Topics}/>
+      </div>
+    </ScrollToTop>
   </Router>
 )
 
