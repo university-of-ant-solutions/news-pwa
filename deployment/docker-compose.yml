@@ -11,7 +11,8 @@ services:
       - ${PWD}/../build:/data/www:rw
       - ${PWD}/nginx-logs:/var/log/nginx
       - ${PWD}/nginx-cache:/tmp/nginx/cache
-
+      - /etc/letsencrypt/live/news-pwa.particle4dev.com:/data/ssl
+      - /etc/letsencrypt/archive:/archive
     ports:
       - "80:80"
       - "443:443"

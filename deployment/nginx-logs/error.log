@@ -1,0 +1,4 @@
+2017/06/29 17:01:16 [emerg] 5#5: BIO_new_file("/data/ssl/fullchain.pem") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/data/ssl/fullchain.pem','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2017/06/29 17:02:37 [emerg] 5#5: BIO_new_file("/data/ssl/fullchain.pem") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/data/ssl/fullchain.pem','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2017/06/29 17:23:34 [emerg] 5#5: BIO_new_file("/data/ssl/fullchain.pem") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/data/ssl/fullchain.pem','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2017/06/29 17:25:36 [emerg] 17#17: BIO_new_file("/data/ssl/fullchain.pem") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/data/ssl/fullchain.pem','r') error:2006D080:BIO routines:BIO_new_file:no such file)
