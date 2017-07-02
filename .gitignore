@@ -28,3 +28,6 @@ yarn-error.log*
 
 # Misc
 .DS_Store
+
+deployment/nginx-logs
+deployment/nginx-cache
