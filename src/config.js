@@ -26,7 +26,10 @@ module.exports = {
   },
 
   // Database
-  databaseUrl: process.env.DATABASE_URL || 'sqlite:database.sqlite',
+  db: {
+    uri: process.env.DATABASE_URL || 'mongodb://localhost:27017/new-pwa',
+    options: {},
+  },
 
   // Web analytics
   analytics: {

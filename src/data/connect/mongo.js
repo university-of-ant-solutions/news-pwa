@@ -1,11 +1,10 @@
 import isFunction from 'lodash/isfunction';
 import mongoose from 'mongoose';
-// import nconf from 'nconf';
 import logger from '../logger';
 
 // http://mongoosejs.com/docs/promises.html
 mongoose.Promise = global.Promise;
-function connect(uri, options, cb) {
+export default function connect(uri, options, cb) {
   // http://mongodb.github.io/node-mongodb-native/2.0/api/Server.html#connections
   options.server = options.server ? options.server : {
     socketOptions: { keepAlive: 1 },
@@ -41,17 +40,4 @@ function connect(uri, options, cb) {
   process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
 
   return connect;
-}
-
-let primaryData = null;
-
-export default function mongo() {
-  if (!primaryData) {
-    const db = {
-      url: 'mongodb://localhost:27017/sns_test',
-      options: {},
-    };
-    primaryData = connect(db.uri, db.options);
-  }
-  return primaryData;
 }

@@ -9,12 +9,12 @@
 
 import { GraphQLList as List } from 'graphql';
 import NewsItemType from '../types/NewsItemType';
-import data from './data.json';
+import { NewsModel } from '../connect';
 
 const news = {
   type: new List(NewsItemType),
   resolve() {
-    return data.data.news;
+    return NewsModel.find({});
   },
 };
 

@@ -24,6 +24,7 @@
     "graphql": "^0.10.3",
     "history": "^4.6.3",
     "isomorphic-style-loader": "^2.0.0",
+    "lodash": "^4.17.4",
     "mongoose": "^4.11.0",
     "mongoose-timestamp": "^0.6.0",
     "nconf": "^0.8.4",

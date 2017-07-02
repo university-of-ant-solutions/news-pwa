@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import timestamp from 'mongoose-timestamp';
 
 const { Schema } = mongoose;
-const { Types: { ObjectId } } = Schema;
 
 const NewsSchema = new Schema({
   title: {
@@ -41,6 +40,4 @@ const NewsSchema = new Schema({
 // https://github.com/drudge/mongoose-timestamp
 NewsSchema.plugin(timestamp);
 
-const NewsModel = mongoose.model('news', NewsSchema);
-
-export default NewsModel;
+export default NewsSchema;
