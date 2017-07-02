@@ -31,3 +31,5 @@ yarn-error.log*
 
 deployment/nginx-logs
 deployment/nginx-cache
+
+logs
