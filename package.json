@@ -20,8 +20,6 @@
     "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
     "express": "^4.15.3",
-    "express-graphql": "^0.6.6",
-    "graphql": "^0.10.3",
     "history": "^4.6.3",
     "isomorphic-style-loader": "^2.0.0",
     "lodash": "^4.17.4",
