@@ -8,7 +8,6 @@ services:
     volumes:
       - ${PWD}/sites-enabled:/etc/nginx/sites-enabled:rw
       - ${PWD}/sites-available:/etc/nginx/sites-available:rw
-      - ${PWD}/../build:/data/www:rw
       - ${PWD}/nginx-logs:/var/log/nginx
       - ${PWD}/nginx-cache:/tmp/nginx/cache
       - /etc/letsencrypt/live/news-pwa.particle4dev.com:/data/ssl
@@ -16,3 +15,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+  
+  server:
+    build:
+      context: ../
+      dockerfile: Dockerfile
