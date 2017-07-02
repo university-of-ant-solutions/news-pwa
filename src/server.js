@@ -23,6 +23,7 @@ import errorPageStyle from './routes/error/ErrorPage.css';
 import createFetch from './createFetch';
 import router from './router';
 import schema from './data/schema';
+import apis from './data/apis';
 import assets from './assets.json'; // eslint-disable-line import/no-unresolved
 import configureStore from './store/configureStore';
 import { setRuntimeVariable } from './actions/runtime';
@@ -58,6 +59,9 @@ app.use('/graphql', expressGraphQL(req => ({
   rootValue: { request: req },
   pretty: __DEV__,
 })));
+
+// apis
+app.use(apis);
 
 //
 // Register server-side rendering middleware

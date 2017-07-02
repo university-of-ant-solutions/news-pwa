@@ -12,7 +12,7 @@ import Home from './Home';
 import Layout from '../../components/Layout';
 
 async function action({ fetch }) {
-  const resp = await fetch('/graphql', {
+  const resp = await fetch('/api/v1/news', {
     body: JSON.stringify({
       query: '{news{title,link,content}}',
     }),
