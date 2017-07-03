@@ -11,6 +11,9 @@ server {
 
   server_name news-pwa.particle4dev.com; # Sets names of a virtual server
 
+  include boilerplate/enable/gzip.conf;
+
+
   ssl_certificate /data/ssl/fullchain.pem;
   ssl_certificate_key /data/ssl/privkey.pem;
 
