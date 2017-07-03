@@ -11,11 +11,10 @@ class Header extends React.Component {
     return (
       <header className={s.header}>
         <nav className={s.inner}>
-          <a href="/">
+          <Link to="/">
             <img className={s.logo} src={logoUrl} srcSet={`${logoUrl2x} 2x`} width="24" height="24" alt="React" />
-          </a>
-          <a href="/top" className="router-link-exact-active router-link-active">Top</a>
-          <a href="/new">New</a>
+          </Link>
+          <a href="/news" className="router-link-exact-active router-link-active">News</a>
           <a href="/" target="_blank" rel="noopener" className={s.github}>
             Built with ReactJS
           </a>

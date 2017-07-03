@@ -29,6 +29,11 @@ html {
 
 body {
   margin: 0;
+  font-size: 15px;
+  background-color: #f2f3f5;
+  margin: 0;
+  padding-top: 55px;
+  overflow-y: scroll;
 }
 
 a {
@@ -184,4 +189,29 @@ textarea {
   h3 {
     page-break-after: avoid;
   }
+}
+
+
+
+.newsView {
+  padding-top: 45px;
+}
+.view {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+.newsListNav {
+  padding: 15px 30px;
+  position: fixed;
+  text-align: center;
+  top: 55px;
+  left: 0;
+  right: 0;
+  z-index: 998;
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+.newsListNav {
+  background-color: #fff;
+  border-radius: 2px;
 }

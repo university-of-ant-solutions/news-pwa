@@ -1,15 +1,7 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import Link from '../../components/Link';
 import s from './Home.css';
 
 class Home extends React.Component {
@@ -23,20 +15,20 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className={s.root}>
-        <div className={s.container}>
-          <h1>React.js News</h1>
+      <div className={s.newsList}>
+        <ul>
           {this.props.news.map(item => (
-            <article key={item.link} className={s.newsItem}>
-              <h1 className={s.newsTitle}><a href={item.link}>{item.title}</a></h1>
-              <div
-                className={s.newsDesc}
-                // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{ __html: item.content }}
-              />
-            </article>
+            <li key={item.link} className={s.newsItem}>
+              <span className={s.score}>35</span>
+              <span className="title">
+                <Link to={`news/${item._id}`} target="_blank" rel="noopener">
+                  {item.title}
+                </Link>
+                <span className={s.host}> (zeptobars.com)</span>
+              </span>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     );
   }
