@@ -1,54 +1,90 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 @import '../variables.css';
 
-:root {
-  --brand-color: #61dafb;
+@media (max-width:860px) {
+  .inner {
+    padding: 15px 30px
+  }
 }
 
-.root {
+@media (max-width:600px) {
+  .inner {
+    padding: 15px
+  }
+  .header a {
+    margin-right: 1em
+  }
+  .github {
+    display: none
+  }
+}
+
+a {
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.header {
   background: #373277;
+  color: #fff;
+  position: fixed;
+  z-index: 999;
+  height: 55px;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.inner {
+  max-width: 800px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 15px 5px;
+}
+
+.header a {
+  color: hsla(0, 0%, 100%, .8);
+  line-height: 24px;
+  transition: color .15s ease;
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 300;
+  letter-spacing: .075em;
+  margin-right: 1.8em;
+}
+
+.header a:hover {
   color: #fff;
 }
 
-.container {
-  margin: 0 auto;
-  padding: 20px 0;
-  max-width: var(--max-content-width);
+.header a.router-link-active {
+  color: #fff;
+  font-weight: 400;
 }
 
-.brand {
-  color: color(var(--brand-color) lightness(+10%));
-  text-decoration: none;
-  font-size: 1.75em; /* ~28px */
+.header a:nth-child(6) {
+  margin-right: 0
 }
 
-.brandTxt {
-  margin-left: 10px;
-}
-
-.banner {
-  text-align: center;
-}
-
-.bannerTitle {
+.github {
+  color: #fff;
+  font-size: .9em;
   margin: 0;
-  padding: 10px;
-  font-weight: normal;
-  font-size: 4em;
-  line-height: 1em;
+  float: right;
 }
 
-.bannerDesc {
-  padding: 0;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 1.25em;
-  margin: 0;
+.logo {
+  width: 24px;
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all .2s ease
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
 }
