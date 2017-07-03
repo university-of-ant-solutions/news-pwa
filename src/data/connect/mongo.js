@@ -1,4 +1,4 @@
-import isFunction from 'lodash/isfunction';
+import isFunction from 'lodash/isFunction';
 import mongoose from 'mongoose';
 import logger from '../logger';
 
