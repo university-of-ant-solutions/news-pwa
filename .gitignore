@@ -31,5 +31,5 @@ yarn-error.log*
 
 deployment/nginx-logs
 deployment/nginx-cache
-
+deployment/mongo
 logs

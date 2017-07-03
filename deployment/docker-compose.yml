@@ -20,3 +20,13 @@ services:
     build:
       context: ../
       dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=mongodb://mongo:27017/new-pwa
+  mongo:
+    image: mongo:3.2
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo:/data
+      - ${PWD}/../backup:/backup:rw
+      - ${PWD}/../bin:/scripts:rw
