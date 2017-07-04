@@ -11,6 +11,7 @@ import path from 'path';
 import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
 import nodeExternals from 'webpack-node-externals';
+import SWPrecachePlugin from 'sw-precache-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import overrideRules from './lib/overrideRules';
 import pkg from '../package.json';
@@ -326,11 +327,31 @@ const clientConfig = {
           screw_ie8: true,
         },
       }),
+
+      // auto generate service worker
+      new SWPrecachePlugin({
+        cacheId: 'news-pwa',
+        filename: 'service-worker.js',
+        minify: true,
+        dontCacheBustUrlsMatching: /./,
+        staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/],
+        runtimeCaching: [
+          {
+            urlPattern: '/',
+            handler: 'networkFirst',
+          },
+          {
+            urlPattern: '/news/:id',
+            handler: 'networkFirst',
+          },
+        ],
+      }),
     ],
 
     // Webpack Bundle Analyzer
     // https://github.com/th0r/webpack-bundle-analyzer
     ...isAnalyze ? [new BundleAnalyzerPlugin()] : [],
+
   ],
 
   // Some libraries import Node modules but don't use them in the browser.

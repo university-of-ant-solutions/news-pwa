@@ -1,12 +1,3 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import path from 'path';
 import express from 'express';
 import cookieParser from 'cookie-parser';
@@ -28,6 +19,8 @@ import configureStore from './store/configureStore';
 import { setRuntimeVariable } from './actions/runtime';
 import config from './config';
 
+const resolve = file => path.resolve(__dirname, file);
+
 const app = express();
 
 //
@@ -40,8 +33,16 @@ global.navigator.userAgent = global.navigator.userAgent || 'all';
 //
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
+// console.log(__DEV__, '__DEV__');
+const serve = (p, cache) => express.static(resolve(p), {
+  maxAge: cache && !__DEV__ ? 1000 * 60 * 60 * 24 * 30 : 0,
+});
+
 app.use(compression({ threshold: 0 }));
+
+app.use('/service-worker.js', serve('./public/assets/service-worker.js'));
 app.use(express.static(path.resolve(__dirname, 'public')));
+
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
