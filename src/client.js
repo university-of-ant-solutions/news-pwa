@@ -164,3 +164,8 @@ if (module.hot) {
     onLocationChange(currentLocation);
   });
 }
+
+// service worker
+if (!__DEV__ && location.protocol === 'https:' && navigator.serviceWorker) {
+  navigator.serviceWorker.register('/service-worker.js');
+}
