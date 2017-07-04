@@ -1,12 +1,24 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+
+
+import createSagaMiddleware from 'redux-saga';
+
+
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 import createHelpers from './createHelpers';
 import createLogger from './logger';
 
+
+const sagaMiddleware = createSagaMiddleware();
+
+
 export default function configureStore(initialState, helpersConfig) {
   const helpers = createHelpers(helpersConfig);
-  const middleware = [thunk.withExtraArgument(helpers)];
+  const middleware = [
+    sagaMiddleware,
+    thunk.withExtraArgument(helpers),
+  ];
 
   let enhancer;
 
@@ -29,6 +41,10 @@ export default function configureStore(initialState, helpersConfig) {
 
   // See https://github.com/rackt/redux/releases/tag/v3.1.0
   const store = createStore(rootReducer, initialState, enhancer);
+
+
+  store.runSaga = sagaMiddleware.run;
+
 
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (__DEV__ && module.hot) {
