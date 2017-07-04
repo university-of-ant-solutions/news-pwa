@@ -15,20 +15,27 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className={s.newsList}>
-        <ul>
-          {this.props.news.map(item => (
-            <li key={item.link} className={s.newsItem}>
-              <span className={s.score}>35</span>
-              <span className="title">
-                <Link to={`news/${item._id}`} rel="noopener">
-                  {item.title}
-                </Link>
-                <span className={s.host}> (zeptobars.com)</span>
-              </span>
-            </li>
-          ))}
-        </ul>
+      <div>
+        <div className={s.newsListNav}>
+          <a className="disabled">&lt; prev</a>
+          <span>1/25</span>
+          <a href="/top/2">more &gt;</a>
+        </div>
+        <div className={s.newsList}>
+          <ul>
+            {this.props.news.map(item => (
+              <li key={item.link} className={s.newsItem}>
+                <span className={s.score}>35</span>
+                <span className="title">
+                  <Link to={`news/${item._id}`} rel="noopener">
+                    {item.title}
+                  </Link>
+                  <span className={s.host}> (zeptobars.com)</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }

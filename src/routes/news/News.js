@@ -15,16 +15,23 @@ class News extends React.Component {
   render() {
     const { data } = this.props;
     return (
-      <div className={s.root}>
-        <div className={s.container}>
-          <article key={data.link} className={s.newsItem}>
-            <h1 className={s.newsTitle}><a href={data.link}>{data.title}</a></h1>
-            <div
-              className={s.newsDesc}
-              // eslint-disable-next-line react/no-danger
-              dangerouslySetInnerHTML={{ __html: data.content }}
-            />
-          </article>
+      <div>
+        <div className={s.newsListNav}>
+          <a className="disabled">&lt; prev</a>
+          <span>1/25</span>
+          <a href="/top/2">more &gt;</a>
+        </div>
+        <div className={s.root}>
+          <div className={s.container}>
+            <article key={data.link} className={s.newsItem}>
+              <h1 className={s.newsTitle}><a href={data.link}>{data.title}</a></h1>
+              <div
+                className={s.newsDesc}
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{ __html: data.content }}
+              />
+            </article>
+          </div>
         </div>
       </div>
     );
