@@ -37,11 +37,18 @@ class Html extends React.Component {
     return (
       <html className="no-js" lang="en">
         <head>
-          <meta charSet="utf-8" />
+	        <meta charset="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <title>{title}</title>
           <meta name="description" content={description} />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
+			    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+          <meta name="mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+          <link rel="apple-touch-icon" sizes="120x120" href="/public/logo-120.png" />
+          <link rel="shortcut icon" sizes="48x48" href="/public/logo-48.png" />
+          <meta name="theme-color" content="#373277">
+          <link rel="manifest" href="/manifest.json">
           {scripts.map(script => <link key={script} rel="preload" href={script} as="script" />)}
           <link rel="apple-touch-icon" href="apple-touch-icon.png" />
           {styles.map(style => (

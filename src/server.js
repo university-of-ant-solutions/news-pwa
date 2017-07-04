@@ -40,6 +40,7 @@ const serve = (p, cache) => express.static(resolve(p), {
 
 app.use(compression({ threshold: 0 }));
 
+app.use('/manifest.json', serve('./manifest.json', true));
 app.use('/service-worker.js', serve('./public/assets/service-worker.js'));
 app.use(express.static(path.resolve(__dirname, 'public')));
 
