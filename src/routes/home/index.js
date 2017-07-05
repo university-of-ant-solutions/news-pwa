@@ -6,7 +6,7 @@ import { getAsyncInjectors } from '../../utils/asyncInjectors';
 import reducer from './reducer';
 import sagas, { getPage } from './sagas';
 
-async function action({ query, fetch }) {
+async function action({ query }) {
   const store = getStore();
 
   const { injectReducer, injectSagas } = getAsyncInjectors(store);
@@ -14,9 +14,6 @@ async function action({ query, fetch }) {
   injectSagas(sagas);
 
   const currentPage = parseInt(query.page, 10) || 1;
-  const resp = await fetch(`/api/v1/news?page=${currentPage}`, {});
-  const r = await resp.json();
-  if (!r || !r.data) throw new Error('Failed to load the news feed.');
   return {
     initData: () => {
       // server side rendering

@@ -11,12 +11,20 @@ import {
 // import { getHelpers } from '../../store/configureStore';
 import fetch from '../../utils/fetch';
 
-// import { makeSelectUsername } from './selectors';
+let apiUrl = '';
 
+// if (process.env.BROWSER) {
+
+if (__DEV__) {
+  apiUrl = 'http://localhost:3000';
+}
+
+// }
+console.log(apiUrl);
 export function* getPage({ page }) {
   try {
     // Call our request helper (see 'utils/request')
-    const repos = yield call(fetch, `http://localhost:3000/api/v1/news?page=${page}`);
+    const repos = yield call(fetch, `${apiUrl}/api/v1/news?page=${page}`);
     yield put(loadPageSuccess(repos.data, repos.paging));
   } catch (err) {
     console.log(err);
