@@ -344,6 +344,10 @@ const clientConfig = {
             urlPattern: '/news/:id',
             handler: 'networkFirst',
           },
+          {
+            urlPattern: /api\/v1/g,
+            handler: 'networkFirst',
+          },
         ],
       }),
     ],
