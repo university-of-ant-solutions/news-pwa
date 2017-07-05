@@ -11,7 +11,7 @@ import {
 // import { getHelpers } from '../../store/configureStore';
 import fetch from '../../utils/fetch';
 
-let apiUrl = '';
+let apiUrl = 'https://news-pwa.particle4dev.com';
 
 // if (process.env.BROWSER) {
 
