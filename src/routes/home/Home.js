@@ -32,13 +32,8 @@ class Home extends React.Component {
     }
   }
 
-  onClick = (evt) => {
-    evt.preventDefault();
-    this.props.onChangeUsername('Adele - Water Under the Bridge [Lyrics]');
-  }
-
   render() {
-    const { pageInfo, currentPage, username, news } = this.props;
+    const { pageInfo, currentPage, news } = this.props;
     return (
       <div>
         <div className={s.newsListNav}>
@@ -47,8 +42,6 @@ class Home extends React.Component {
           <Link to={`/?page=${currentPage + 1}`}>more &gt;</Link>
         </div>
         <div className={s.newsList}>
-          { username }
-          <button onClick={this.onClick}>Click here</button>
           <ul>
             {news.toJS().map(item => (
               <li key={item.link} className={s.newsItem}>
@@ -80,20 +73,16 @@ Home.propTypes = {
     skip: PropTypes.number.isRequired,
   }).isRequired,
   currentPage: PropTypes.number.isRequired,
-  username: PropTypes.string.isRequired,
-  onChangeUsername: PropTypes.func.isRequired,
   onChangePage: PropTypes.func.isRequired,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangeUsername: value => dispatch(changeUsername(value)),
     onChangePage: value => dispatch(loadPage(value)),
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  username: makeSelectUsername(),
   pageInfo: makeSelectPageInfo(),
   news: makeSelectList(),
 });

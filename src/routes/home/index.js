@@ -4,7 +4,7 @@ import Layout from '../../components/Layout';
 import { getStore } from '../../store/configureStore';
 import { getAsyncInjectors } from '../../utils/asyncInjectors';
 import reducer from './reducer';
-import sagas, { getRepos, getPage } from './sagas';
+import sagas, { getPage } from './sagas';
 
 async function action({ query, fetch }) {
   const store = getStore();
@@ -22,12 +22,11 @@ async function action({ query, fetch }) {
       // server side rendering
       // run only on server
       // https://github.com/redux-saga/redux-saga/issues/13#issuecomment-182883680
-      const getReposTask = store.runSaga(getRepos);
       const getPageTask = store.runSaga(getPage, {
         page: currentPage,
       });
 
-      return [getReposTask.done, getPageTask.done];
+      return [getPageTask.done];
     },
     chunks: ['home'],
     title: 'React Starter Kit',
