@@ -1,3 +1,7 @@
+// needed for regenerator-runtime
+// (ES7 generator support is required by redux-saga)
+import 'babel-polyfill';
+
 import path from 'path';
 import express from 'express';
 import cookieParser from 'cookie-parser';
@@ -17,6 +21,7 @@ import apis from './data/apis';
 import assets from './assets.json'; // eslint-disable-line import/no-unresolved
 import configureStore from './store/configureStore';
 import { setRuntimeVariable } from './actions/runtime';
+import { INITIALNOW } from './constants';
 import config from './config';
 
 const resolve = file => path.resolve(__dirname, file);
@@ -81,7 +86,7 @@ app.get('*', async (req, res, next) => {
     });
 
     store.dispatch(setRuntimeVariable({
-      name: 'initialNow',
+      name: INITIALNOW,
       value: Date.now(),
     }));
 
@@ -110,6 +115,8 @@ app.get('*', async (req, res, next) => {
       res.redirect(route.status || 302, route.redirect);
       return;
     }
+
+    await Promise.all(route.initData());
 
     const data = { ...route };
     data.children = ReactDOM.renderToString(
