@@ -29,7 +29,7 @@ async function action({ query, fetch }) {
       return [getPageTask.done];
     },
     chunks: ['home'],
-    title: 'React Starter Kit',
+    title: 'News PWA',
     component: <Layout>
       <Home currentPage={currentPage} />
     </Layout>,

@@ -34,12 +34,24 @@ class Home extends React.Component {
 
   render() {
     const { pageInfo, currentPage, news } = this.props;
+    const total = totalPage(pageInfo.get('total'));
+    // if (currentPage < total) {
+
+    // } else {
+
+    // }
     return (
       <div>
         <div className={s.newsListNav}>
-          <Link className="disabled" to={`/?page=${currentPage - 1}`}>&lt; prev</Link>
-          <span> {currentPage} / { totalPage(pageInfo.get('total')) } </span>
-          <Link to={`/?page=${currentPage + 1}`}>more &gt;</Link>
+          {
+            currentPage <= 1 ? <a className={s.linkDisable}>&lt; prev</a> :
+            <Link to={`/?page=${currentPage - 1}`}>&lt; prev</Link>
+          }
+          <span> {currentPage} / { total } </span>
+          {
+            currentPage >= total ? <a className={s.linkDisable}>more &gt;</a> :
+            <Link to={`/?page=${currentPage + 1}`}>more &gt;</Link>
+          }
         </div>
         <div className={s.newsList}>
           <ul>

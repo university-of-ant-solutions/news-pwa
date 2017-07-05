@@ -58,3 +58,7 @@
   background-color: #fff;
   border-radius: 2px;
 }
+
+.linkDisable {
+  color: rgb(153, 153, 153);
+}
