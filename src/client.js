@@ -1,11 +1,6 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
+// needed for regenerator-runtime
+// (ES7 generator support is required by redux-saga)
+import 'babel-polyfill';
 
 import 'whatwg-fetch';
 import React from 'react';
@@ -13,6 +8,7 @@ import ReactDOM from 'react-dom';
 import deepForceUpdate from 'react-deep-force-update';
 import queryString from 'query-string';
 import { createPath } from 'history/PathUtils';
+import watchLocationChange from './actions/router';
 import App from './components/App';
 import createFetch from './createFetch';
 import configureStore from './store/configureStore';
@@ -36,11 +32,11 @@ const context = {
   fetch: createFetch(self.fetch, {
     baseUrl: window.App.apiUrl,
   }),
-  // Initialize a new Redux store
-  // http://redux.js.org/docs/basics/UsageWithReact.html
-  store: configureStore(window.App.state, { history }),
   storeSubscription: null,
 };
+// Initialize a new Redux store
+// http://redux.js.org/docs/basics/UsageWithReact.html
+context.store = configureStore(window.App.state, { history, fetch: context.fetch });
 
 // Switch off the native scroll restoration behavior and handle it manually
 // https://developers.google.com/web/updates/2015/09/history-api-scroll-restoration
@@ -152,6 +148,11 @@ async function onLocationChange(location, action) {
 // For more information visit https://github.com/mjackson/history#readme
 history.listen(onLocationChange);
 onLocationChange(currentLocation);
+
+// listen router change
+const w = watchLocationChange(context.store);
+history.listen(w);
+// const unlisten = history.listen(w);
 
 // Enable Hot Module Replacement (HMR)
 if (module.hot) {

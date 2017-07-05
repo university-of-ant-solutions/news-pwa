@@ -20,11 +20,6 @@ class Layout extends React.Component {
       <div>
         <Header />
         <div className={cx(s.newsView, s.view)}>
-          <div className={s.newsListNav}>
-            <a className="disabled">&lt; prev</a>
-            <span>1/25</span>
-            <a href="/top/2">more &gt;</a>
-          </div>
           {this.props.children}
           <Feedback />
           <Footer />

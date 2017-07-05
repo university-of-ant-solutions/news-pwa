@@ -6,15 +6,18 @@
   width: 100%;
   transition: all .5s cubic-bezier(.55,0,.1,1);
 }
+
 .newsList {
   background-color: #fff;
   border-radius: 2px;
 }
+
 .newsList ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
+
 .newsItem {
   background-color: #fff;
   padding: 20px 30px 20px 80px;
@@ -34,7 +37,28 @@
   text-align: center;
   margin-top: -10px;
 }
+
 .host, .meta {
   font-size: .85em;
   color: #828282;
+}
+
+.newsListNav {
+  padding: 15px 30px;
+  position: fixed;
+  text-align: center;
+  top: 55px;
+  left: 0;
+  right: 0;
+  z-index: 998;
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+
+.newsListNav {
+  background-color: #fff;
+  border-radius: 2px;
+}
+
+.linkDisable {
+  color: rgb(153, 153, 153);
 }
