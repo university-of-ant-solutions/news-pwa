@@ -29,14 +29,15 @@ export default class NewsRouter extends APIRouter {
       res.status(200).json(await NewsModel.findOne({ _id: params.id }));
     }));
 
-    this.route('GET', '/news', [], wrap(async ({ params }, res) => res.status(200).json(await newsService.find({
-      query: {
-        $skip: (params.page - 1) * PAGING_DEFAULT,
-        $sort: {
-          pubDate: -1,
+    this.route('GET', '/news', [], wrap(async ({ query }, res) => {
+      res.status(200).json(await newsService.find({
+        query: {
+          $skip: (parseInt(query.page, 10) - 1) * PAGING_DEFAULT,
+          $sort: {
+            pubDate: -1,
+          },
         },
-      },
-    }),
-    )));
+      }));
+    }));
   }
 }

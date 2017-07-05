@@ -12,7 +12,11 @@ import {
   changeUsername,
   loadPage,
 } from './actions';
-import { makeSelectUsername } from './selectors';
+import {
+  makeSelectUsername,
+  makeSelectPageInfo,
+  makeSelectList,
+} from './selectors';
 import s from './Home.css';
 
 function totalPage(t) {
@@ -21,31 +25,32 @@ function totalPage(t) {
 
 class Home extends React.Component {
 
-  onClick = () => {
+  componentWillReceiveProps(nextProps) {
+    const { currentPage, onChangePage } = this.props;
+    if (currentPage !== nextProps.currentPage) {
+      onChangePage(nextProps.currentPage);
+    }
+  }
+
+  onClick = (evt) => {
+    evt.preventDefault();
     this.props.onChangeUsername('Adele - Water Under the Bridge [Lyrics]');
   }
 
-  onChangePage = (evt) => {
-    evt.preventDefault();
-    const { onChangePage, currentPage } = this.props;
-    onChangePage(currentPage + 1);
-  }
-
   render() {
-    const { pageInfo, currentPage, username } = this.props;
-
+    const { pageInfo, currentPage, username, news } = this.props;
     return (
       <div>
         <div className={s.newsListNav}>
           <Link className="disabled" to={`/?page=${currentPage - 1}`}>&lt; prev</Link>
-          <span> {currentPage} / { totalPage(pageInfo.total) } </span>
+          <span> {currentPage} / { totalPage(pageInfo.get('total')) } </span>
           <Link to={`/?page=${currentPage + 1}`}>more &gt;</Link>
         </div>
         <div className={s.newsList}>
           { username }
           <button onClick={this.onClick}>Click here</button>
           <ul>
-            {this.props.news.map(item => (
+            {news.toJS().map(item => (
               <li key={item.link} className={s.newsItem}>
                 <span className={s.score}>35</span>
                 <span className="title">
@@ -64,11 +69,11 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  news: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-    content: PropTypes.string,
-  })).isRequired,
+  // news: PropTypes.arrayOf(PropTypes.shape({
+  //   title: PropTypes.string.isRequired,
+  //   link: PropTypes.string.isRequired,
+  //   content: PropTypes.string,
+  // })).isRequired,
   pageInfo: PropTypes.shape({
     total: PropTypes.number.isRequired,
     limit: PropTypes.number.isRequired,
@@ -89,6 +94,8 @@ export function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = createStructuredSelector({
   username: makeSelectUsername(),
+  pageInfo: makeSelectPageInfo(),
+  news: makeSelectList(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(s)(Home));

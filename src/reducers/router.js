@@ -11,7 +11,7 @@ export default function routeReducer(state = routeInitialState, action) {
     /* istanbul ignore next */
     case LOCATION_CHANGE:
       return state.merge({
-        locationBeforeTransitions: action.path,
+        locationBeforeTransitions: action.payload.path,
       });
     default:
       return state;

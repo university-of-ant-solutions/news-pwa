@@ -1,8 +1,12 @@
-import { take, call, put, select, cancel, takeLatest } from 'redux-saga/effects';
+import { all, take, call, put, select, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from '../../actions/router';
-import { CHANGE_USERNAME } from './constants';
+import {
+  CHANGE_USERNAME,
+  LOAD_PAGE,
+} from './constants';
 import {
   changeUsernameSuccess,
+  loadPageSuccess,
   // repoLoadingError,
 } from './actions';
 
@@ -17,23 +21,35 @@ export function* getRepos() {
   // const { fetch } = getHelpers();
   try {
     // Call our request helper (see 'utils/request')
-    console.log(process.env.BROWSER, 'before');
     const repos = yield call(fetch, 'http://localhost:3000/api/v1/username');
     yield put(changeUsernameSuccess(repos));
-    console.log(process.env.BROWSER, repos);
-
   } catch (err) {
     console.log(err);
-  //   yield put(repoLoadingError(err));
+    // yield put(repoLoadingError(err));
+  }
+}
+
+export function* getPage({ page }) {
+  try {
+    // Call our request helper (see 'utils/request')
+    const repos = yield call(fetch, `http://localhost:3000/api/v1/news?page=${page}`);
+    yield put(loadPageSuccess(repos.data, repos.paging));
+  } catch (err) {
+    console.log(err);
+    // yield put(repoLoadingError(err));
   }
 }
 
 export function* githubData() {
-  const watcher = yield takeLatest(CHANGE_USERNAME, getRepos);
+  const [fetchUsername, fetchPage] = yield all([
+    takeLatest(CHANGE_USERNAME, getRepos),
+    takeLatest(LOAD_PAGE, getPage),
+  ]);
 
   // Suspend execution until location changes
   yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
+  yield cancel(fetchUsername);
+  yield cancel(fetchPage);
 }
 
 // Bootstrap sagas

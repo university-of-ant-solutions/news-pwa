@@ -4,7 +4,7 @@ import Layout from '../../components/Layout';
 import { getStore } from '../../store/configureStore';
 import { getAsyncInjectors } from '../../utils/asyncInjectors';
 import reducer from './reducer';
-import sagas, { getRepos } from './sagas';
+import sagas, { getRepos, getPage } from './sagas';
 
 async function action({ query, fetch }) {
   const store = getStore();
@@ -13,7 +13,7 @@ async function action({ query, fetch }) {
   injectReducer('home', reducer);
   injectSagas(sagas);
 
-  const currentPage = query.page || 1;
+  const currentPage = parseInt(query.page, 10) || 1;
   const resp = await fetch(`/api/v1/news?page=${currentPage}`, {});
   const r = await resp.json();
   if (!r || !r.data) throw new Error('Failed to load the news feed.');
@@ -21,13 +21,18 @@ async function action({ query, fetch }) {
     initData: () => {
       // server side rendering
       // run only on server
-      const task = store.runSaga(getRepos);
-      return [task.done];
+      // https://github.com/redux-saga/redux-saga/issues/13#issuecomment-182883680
+      const getReposTask = store.runSaga(getRepos);
+      const getPageTask = store.runSaga(getPage, {
+        page: currentPage,
+      });
+
+      return [getReposTask.done, getPageTask.done];
     },
     chunks: ['home'],
     title: 'React Starter Kit',
     component: <Layout>
-      <Home currentPage={currentPage} pageInfo={r.paging} news={r.data} />
+      <Home currentPage={currentPage} />
     </Layout>,
   };
 }

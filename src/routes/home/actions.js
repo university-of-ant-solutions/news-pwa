@@ -27,10 +27,11 @@ export function loadPage(page) {
   };
 }
 
-export function loadPageSuccess(data) {
+export function loadPageSuccess(data, paging) {
   return {
     type: LOAD_PAGE_SUCCESS,
     data,
+    paging,
   };
 }
 

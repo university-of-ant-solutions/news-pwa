@@ -21,6 +21,7 @@ import apis from './data/apis';
 import assets from './assets.json'; // eslint-disable-line import/no-unresolved
 import configureStore from './store/configureStore';
 import { setRuntimeVariable } from './actions/runtime';
+import { locationChange } from './actions/router';
 import { INITIALNOW } from './constants';
 import config from './config';
 
@@ -89,6 +90,8 @@ app.get('*', async (req, res, next) => {
       name: INITIALNOW,
       value: Date.now(),
     }));
+
+    store.dispatch(locationChange(req.path));
 
     // Global (context) variables that can be easily accessed from any React component
     // https://facebook.github.io/react/docs/context.html

@@ -7,7 +7,19 @@ const makeSelectUsername = () => createSelector(
   homeState => homeState.get('username'),
 );
 
+const makeSelectPageInfo = () => createSelector(
+  selectHome,
+  homeState => homeState.get('pageInfo'),
+);
+
+const makeSelectList = () => createSelector(
+  selectHome,
+  homeState => homeState.get('list'),
+);
+
 export {
   selectHome,
   makeSelectUsername,
+  makeSelectPageInfo,
+  makeSelectList,
 };
