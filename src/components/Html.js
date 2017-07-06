@@ -38,6 +38,7 @@ class Html extends React.Component {
       <html className="no-js" lang="en">
         <head>
           <meta charSet="utf-8" />
+          <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <title>{title}</title>
           <meta name="description" content={description} />
