@@ -45,12 +45,12 @@ class Html extends React.Component {
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-          <link rel="apple-touch-icon" sizes="120x120" href="/public/logo-120.png" />
-          <link rel="shortcut icon" sizes="48x48" href="/public/logo-48.png" />
+          <link rel="apple-touch-icon" sizes="120x120" href="/logo-120.png" />
+          <link rel="shortcut icon" sizes="48x48" href="/logo-48.png" />
           <meta name="theme-color" content="#373277" />
           <link rel="manifest" href="/manifest.json" />
-          <link type="text/css" rel="stylesheet" href="http://github.hubspot.com/offline/themes/offline-theme-chrome.css" />
-          <link type="text/css" rel="stylesheet" href="http://github.hubspot.com/offline/themes/offline-language-english.css" />
+          <link type="text/css" rel="stylesheet" href="/offline-theme-chrome.css" />
+          <link type="text/css" rel="stylesheet" href="/offline-language-english.css" />
           {scripts.map(script => <link key={script} rel="preload" href={script} as="script" />)}
           <link rel="apple-touch-icon" href="apple-touch-icon.png" />
           {styles.map(style => (
