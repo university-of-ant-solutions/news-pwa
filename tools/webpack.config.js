@@ -345,6 +345,10 @@ const clientConfig = {
             handler: 'networkFirst',
           },
           {
+            urlPattern: 'api/v1/check',
+            handler: 'networkOnly',
+          },
+          {
             urlPattern: /api\/v1/g,
             handler: 'networkFirst',
           },

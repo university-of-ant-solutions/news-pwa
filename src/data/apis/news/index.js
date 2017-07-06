@@ -19,9 +19,10 @@ const newsService = Service({
 export default class NewsRouter extends APIRouter {
 
   mountRoutes() {
-    this.route('GET', '/username', [], wrap(async ({ params }, res) => {
+
+    this.route('GET', '/check', [], wrap(async ({ params }, res) => {
       res.status(200).json({
-        username: 'particle4dev',
+        status: 'ok',
       });
     }));
 

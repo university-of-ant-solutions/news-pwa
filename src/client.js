@@ -18,10 +18,9 @@ import router from './router';
 
 window.Offline.options = {
   checks: {
-    image: {
-      url: 'favicon.ico',
+    xhr: {
+      url: '/api/v1/check',
     },
-    active: 'image',
   },
   checkOnLoad: true,
   interceptRequests: true,
