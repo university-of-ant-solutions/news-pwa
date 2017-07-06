@@ -16,13 +16,12 @@ import history from './history';
 import { updateMeta } from './DOMUtils';
 import router from './router';
 
-// window.Offline = Offline;
-const offlineCheckUrl = 'https://data.4zzz.oaaaarg.au/grid/';
 window.Offline.options = {
   checks: {
-    xhr: {
-      url: (offlineCheckUrl),
+    image: {
+      url: 'favicon.ico',
     },
+    active: 'image',
   },
   checkOnLoad: true,
   interceptRequests: true,
