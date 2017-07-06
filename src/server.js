@@ -119,7 +119,9 @@ app.get('*', async (req, res, next) => {
       return;
     }
 
-    await Promise.all(route.initData());
+    if (route.initData) {
+      await Promise.all(route.initData());
+    }
 
     const data = { ...route };
     data.children = ReactDOM.renderToString(
