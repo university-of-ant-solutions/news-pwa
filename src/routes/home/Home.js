@@ -9,11 +9,9 @@ import {
   // PAGING_MAX,
 } from '../../constants';
 import {
-  changeUsername,
   loadPage,
 } from './actions';
 import {
-  makeSelectUsername,
   makeSelectPageInfo,
   makeSelectList,
 } from './selectors';
@@ -30,6 +28,11 @@ class Home extends React.Component {
     if (currentPage !== nextProps.currentPage) {
       onChangePage(nextProps.currentPage);
     }
+  }
+
+  componentDidMount = () => {
+    const { currentPage, onChangePage } = this.props;
+    onChangePage(currentPage);
   }
 
   render() {
@@ -79,11 +82,11 @@ Home.propTypes = {
   //   link: PropTypes.string.isRequired,
   //   content: PropTypes.string,
   // })).isRequired,
-  pageInfo: PropTypes.shape({
-    total: PropTypes.number.isRequired,
-    limit: PropTypes.number.isRequired,
-    skip: PropTypes.number.isRequired,
-  }).isRequired,
+  // pageInfo: PropTypes.shape({
+  //   total: PropTypes.number.isRequired,
+  //   limit: PropTypes.number.isRequired,
+  //   skip: PropTypes.number.isRequired,
+  // }).isRequired,
   currentPage: PropTypes.number.isRequired,
   onChangePage: PropTypes.func.isRequired,
 };

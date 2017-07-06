@@ -10,6 +10,9 @@ const initialState = fromJS({
   list: [],
   pageInfo: {
     currentPage: 1,
+    total: 1,
+    limit: 0,
+    skip: 0,
   },
 });
 

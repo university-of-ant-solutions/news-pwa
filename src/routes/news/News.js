@@ -1,36 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import history from '../../history';
+import {
+  makeSelectId,
+  makeSelectData,
+} from './selectors';
+import {
+  loadNew,
+} from './actions';
 import s from './News.css';
 
 class News extends React.Component {
-  static propTypes = {
-    data: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
-      content: PropTypes.string,
-    }).isRequired,
-  };
+
+  onBack = (evt) => {
+    evt.preventDefault();
+    history.goBack();
+  }
+
+  componentDidMount = () => {
+    const { onLoadNew, params, data } = this.props;
+    if (!data || params.id !== data.get('_id')) {
+      onLoadNew(params.id);
+    }
+  }
 
   render() {
     const { data } = this.props;
     return (
       <div>
         <div className={s.newsListNav}>
-          <a className="disabled">&lt; prev</a>
-          <span>1/25</span>
-          <a href="/top/2">more &gt;</a>
+          <span onClick={this.onBack}>Back</span>
         </div>
         <div className={s.root}>
           <div className={s.container}>
-            <article key={data.link} className={s.newsItem}>
-              <h1 className={s.newsTitle}><a href={data.link}>{data.title}</a></h1>
+            {data && <article key={data.get('link')} className={s.newsItem}>
+              <h1 className={s.newsTitle}><a href={data.get('link')}>{data.get('title')}</a></h1>
               <div
                 className={s.newsDesc}
                 // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{ __html: data.content }}
+                dangerouslySetInnerHTML={{ __html: data.get('content') }}
               />
-            </article>
+            </article>}
           </div>
         </div>
       </div>
@@ -38,4 +51,27 @@ class News extends React.Component {
   }
 }
 
-export default withStyles(s)(News);
+News.propTypes = {
+  data: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+    content: PropTypes.string,
+  }),
+  onLoadNew: PropTypes.func.isRequired,
+};
+News.defaultProp = {
+  data: null,
+};
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    onLoadNew: value => dispatch(loadNew(value)),
+  };
+}
+
+const mapStateToProps = createStructuredSelector({
+  id: makeSelectId(),
+  data: makeSelectData(),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(s)(News));
