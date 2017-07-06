@@ -5121,6 +5121,10 @@ object.values@^1.0.4:
     function-bind "^1.1.0"
     has "^1.0.1"
 
+offline-js@^0.7.19:
+  version "0.7.19"
+  resolved "https://registry.yarnpkg.com/offline-js/-/offline-js-0.7.19.tgz#60b68b6dccf3cd5528b5c8577280dceebdebab99"
+
 on-finished@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"

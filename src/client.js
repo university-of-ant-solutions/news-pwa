@@ -1,8 +1,8 @@
 // needed for regenerator-runtime
 // (ES7 generator support is required by redux-saga)
 import 'babel-polyfill';
-
 import 'whatwg-fetch';
+import 'offline-js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import deepForceUpdate from 'react-deep-force-update';
@@ -15,6 +15,23 @@ import configureStore from './store/configureStore';
 import history from './history';
 import { updateMeta } from './DOMUtils';
 import router from './router';
+
+// window.Offline = Offline;
+const offlineCheckUrl = 'https://data.4zzz.oaaaarg.au/grid/';
+window.Offline.options = {
+  checks: {
+    xhr: {
+      url: (offlineCheckUrl),
+    },
+  },
+  checkOnLoad: true,
+  interceptRequests: true,
+  reconnect: {
+    initialDelay: 3,
+  },
+  requests: true,
+  game: false,
+};
 
 /* eslint-disable global-require */
 
