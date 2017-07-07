@@ -3,6 +3,7 @@
 import 'babel-polyfill';
 import 'whatwg-fetch';
 import 'offline-js';
+import NProgress from 'nprogress';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import deepForceUpdate from 'react-deep-force-update';
@@ -16,6 +17,7 @@ import history from './history';
 import { updateMeta } from './DOMUtils';
 import router from './router';
 
+window.NProgress = NProgress;
 window.Offline.options = {
   checks: {
     xhr: {

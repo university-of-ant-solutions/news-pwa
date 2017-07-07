@@ -10,6 +10,7 @@ import {
 } from './selectors';
 import {
   loadNew,
+  clearData,
 } from './actions';
 import s from './News.css';
 
@@ -25,6 +26,11 @@ class News extends React.Component {
     if (!data || params.id !== data.get('_id')) {
       onLoadNew(params.id);
     }
+  }
+
+  componentWillUnmount = () => {
+    const { onClearData } = this.props;
+    onClearData();
   }
 
   render() {
@@ -58,6 +64,7 @@ News.propTypes = {
     content: PropTypes.string,
   }),
   onLoadNew: PropTypes.func.isRequired,
+  onClearData: PropTypes.func.isRequired,
 };
 News.defaultProp = {
   data: null,
@@ -66,6 +73,7 @@ News.defaultProp = {
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadNew: value => dispatch(loadNew(value)),
+    onClearData: () => dispatch(clearData()),
   };
 }
 

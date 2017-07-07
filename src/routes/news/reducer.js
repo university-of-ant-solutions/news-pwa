@@ -3,6 +3,7 @@ import { fromJS } from 'immutable';
 import {
   LOAD_NEW_SUCCESS,
   LOAD_NEW,
+  CLEAR_DATA,
 } from './constants';
 
 // The initial state of the App
@@ -21,6 +22,9 @@ function newReducer(state = initialState, action) {
     case LOAD_NEW_SUCCESS:
       return state
         .set('data', fromJS(action.data));
+
+    case CLEAR_DATA:
+      return initialState;
 
     default:
       return state;

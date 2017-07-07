@@ -20,16 +20,17 @@ if (__DEV__) {
 }
 
 // }
-console.log(apiUrl);
 export function* getPage({ page }) {
   try {
     // Call our request helper (see 'utils/request')
+    process.env.BROWSER && NProgress.start();
     const repos = yield call(fetch, `${apiUrl}/api/v1/news?page=${page}`);
     yield put(loadPageSuccess(repos.data, repos.paging));
   } catch (err) {
     console.log(err);
     // yield put(repoLoadingError(err));
   }
+  process.env.BROWSER && NProgress.done();
 }
 
 export function* githubData() {

@@ -15,6 +15,7 @@ if (__DEV__) {
 }
 export function* getNew({ id }) {
   try {
+    process.env.BROWSER && NProgress.start();
     // Call our request helper (see 'utils/request')
     const repos = yield call(fetch, `${apiUrl}/api/v1/news/${id}`);
     yield put(loadNewSuccess(repos));
@@ -22,6 +23,7 @@ export function* getNew({ id }) {
     console.log(err);
     // yield put(repoLoadingError(err));
   }
+  process.env.BROWSER && NProgress.done();
 }
 
 export function* watchNewPage() {

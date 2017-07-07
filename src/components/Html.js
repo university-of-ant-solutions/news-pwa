@@ -56,6 +56,7 @@ class Html extends React.Component {
           !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(e){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
           loadCSS("/offline-theme-chrome.css");
           loadCSS("/offline-language-english.css");
+          loadCSS("/nprogress.css");
           ` }} />
           {scripts.map(script => <link key={script} rel="preload" href={script} as="script" />)}
           <link rel="apple-touch-icon" href="apple-touch-icon.png" />
