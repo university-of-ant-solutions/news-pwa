@@ -1,5 +1,5 @@
 // import createError from 'http-errors';
-import random from 'lodash/random';
+// import random from 'lodash/random';
 import { NewsModel, Service } from '../../connect';
 import { APIRouter } from '../../../utils/rest';
 import {
@@ -7,7 +7,7 @@ import {
   PAGING_MAX,
 } from '../../../constants';
 
-import data from './data.json';
+// import data from './data.json';
 /**
 (async () => {
   try {
