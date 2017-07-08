@@ -24,6 +24,9 @@ RUN \
 RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/dumb-init_${DUMB_INIT_VERSION}_amd64 && \
     chmod +x /usr/local/bin/dumb-init
 
+# remove packages
+RUN apk del .build-deps
+
 # Set a working directory
 WORKDIR /usr/src/app
 
@@ -34,9 +37,6 @@ RUN yarn install --production --no-progress
 
 # Copy application files
 COPY ./build .
-
-# remove packages
-RUN apk del .build-deps
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
