@@ -330,7 +330,7 @@ const clientConfig = {
         //   }
         //   console.log(message);
         // },
-        minify: true,
+        minify: false,
         staticFileGlobs: [
           '**.css'
         ],
