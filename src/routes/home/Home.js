@@ -21,6 +21,12 @@ function totalPage(t) {
   return Math.ceil(t / PAGING_DEFAULT);
 }
 
+function convertDate(inputFormat) {
+  function pad(s) { return (s < 10) ? '0' + s : s; }
+  var d = new Date(inputFormat);
+  return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+}
+
 class Home extends React.Component {
 
   componentWillReceiveProps(nextProps) {
@@ -38,11 +44,6 @@ class Home extends React.Component {
   render() {
     const { pageInfo, currentPage, news } = this.props;
     const total = totalPage(pageInfo.get('total'));
-    // if (currentPage < total) {
-
-    // } else {
-
-    // }
     return (
       <div>
         <div className={s.newsListNav}>
@@ -60,12 +61,15 @@ class Home extends React.Component {
           <ul>
             {news.toJS().map(item => (
               <li key={item.link} className={s.newsItem}>
-                <span className={s.score}>35</span>
+                <span className={s.score}>{ item.point }</span>
                 <span className="title">
                   <Link to={`news/${item._id}`} rel="noopener">
-                    {item.title}
+                    { item.title }
                   </Link>
-                  <span className={s.host}> (zeptobars.com)</span>
+                  <br />
+                  <span className={s.host}>
+                    Publish Date: { convertDate(item.pubDate) }
+                  </span>
                 </span>
               </li>
             ))}

@@ -1,4 +1,5 @@
 // import createError from 'http-errors';
+import random from 'lodash/random';
 import { NewsModel, Service } from '../../connect';
 import { APIRouter } from '../../../utils/rest';
 import {
@@ -7,44 +8,35 @@ import {
 } from '../../../constants';
 
 import data from './data.json';
-
+/**
 (async () => {
   try {
     const { data: { news } } = data;
-    for (var i = news.length - 1; i >= 0; i--) {
+    for (let i = news.length - 1; i >= 0; i--) {
       let t = await NewsModel.findOne({ guid: news[i].guid });
       if (!t) {
         await NewsModel.create(news[i]);
         console.log(`done: ${news[i].guid}`);
       }
     }
+
+    const c = await NewsModel.find({});
+    for (let y = c.length - 1; y >= 0; y--) {
+      let t = await NewsModel.findOne({ guid: c[y].guid });
+      if (t) {
+        await NewsModel.update({
+          _id: t._id,
+        },
+        {$set: {
+          point: random(0, 100),
+        }});
+      }
+    }
   } catch (e) {
     console.log(e);
   }
-//   const buildingId = '58da279f0ff5af8c8be59c36';
-//   let user = '58f9c1bf2d4581000484b188';
-//   let t = await BuildingMembersModel.findOne({ building: buildingId, user });
-//   if (!t) {
-//     await BuildingMembersModel.create({
-//       building: buildingId,
-//       user,
-//       type: ADMIN,
-//       status: ACCEPTED,
-//     });
-//   }
-//   user = '59034c6c60f3c7beab57220a';
-//   await BuildingMembersModel.remove({ building: buildingId, user });
-//   t = await BuildingMembersModel.findOne({ building: buildingId, user });
-//   if (!t) {
-//     await BuildingMembersModel.create({
-//       building: buildingId,
-//       user,
-//       type: MEMBER,
-//       status: PENDING,
-//     });
-//   }
 })();
-
+*/
 const wrap = fn => (...args) => fn(...args).catch(args[2]);
 
 const newsService = Service({

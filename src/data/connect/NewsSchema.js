@@ -35,6 +35,10 @@ const NewsSchema = new Schema({
   categories: {
     type: Array,
   },
+  point: {
+    type: Number,
+    required: true,
+  },
 });
 
 // https://github.com/drudge/mongoose-timestamp
