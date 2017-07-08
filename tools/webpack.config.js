@@ -332,7 +332,7 @@ const clientConfig = {
         // },
         minify: false,
         staticFileGlobs: [
-          '**.css'
+          '*.css'
         ],
         mergeStaticsConfig: true, // if you don't set this to true, you won't see any webpack-emitted assets in your serviceworker config
         dontCacheBustUrlsMatching: /./,
