@@ -1,12 +1,3 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import path from 'path';
 import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
@@ -332,7 +323,18 @@ const clientConfig = {
       new SWPrecachePlugin({
         cacheId: 'news-pwa',
         filename: 'service-worker.js',
+        // logger(message) {
+        //   if (message.indexOf('Total precache size is') === 0) {
+        //     // This message occurs for every build and is a bit too noisy.
+        //     return;
+        //   }
+        //   console.log(message);
+        // },
         minify: true,
+        staticFileGlobs: [
+          '**.css'
+        ],
+        mergeStaticsConfig: true, // if you don't set this to true, you won't see any webpack-emitted assets in your serviceworker config
         dontCacheBustUrlsMatching: /./,
         staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/],
         runtimeCaching: [
