@@ -7,24 +7,14 @@ import {
   loadPageSuccess,
   // repoLoadingError,
 } from './actions';
-
 // import { getHelpers } from '../../store/configureStore';
-import fetch from '../../utils/fetch';
 
-let apiUrl = 'https://news-pwa.particle4dev.com';
-
-// if (process.env.BROWSER) {
-
-if (__DEV__) {
-  apiUrl = 'http://localhost:3000';
-}
-
-// }
-export function* getPage({ page }) {
+// both only
+export function* getPage({ fetch }, { page }) {
   try {
     // Call our request helper (see 'utils/request')
     process.env.BROWSER && NProgress.start();
-    const repos = yield call(fetch, `${apiUrl}/api/v1/news?page=${page}`);
+    const repos = yield call(fetch, `/api/v1/news?page=${page}`);
     yield put(loadPageSuccess(repos.data, repos.paging));
   } catch (err) {
     console.log(err);
@@ -33,9 +23,10 @@ export function* getPage({ page }) {
   process.env.BROWSER && NProgress.done();
 }
 
-export function* githubData() {
+export function* githubData(context) {
+  // client only
   const [fetchPage] = yield all([
-    takeLatest(LOAD_PAGE, getPage),
+    takeLatest(LOAD_PAGE, getPage, context),
   ]);
 
   // Suspend execution until location changes

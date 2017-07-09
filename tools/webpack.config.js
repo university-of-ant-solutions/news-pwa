@@ -296,6 +296,7 @@ const clientConfig = {
     }),
 
     ...isDebug ? [] : [
+        new webpack.optimize.DedupePlugin(),
       // Decrease script evaluation time
       // https://github.com/webpack/webpack/blob/master/examples/scope-hoisting/README.md
       new webpack.optimize.ModuleConcatenationPlugin(),
@@ -332,7 +333,7 @@ const clientConfig = {
         // },
         minify: false,
         staticFileGlobs: [
-          '*.css'
+          `${path.resolve(__dirname, "../build/public/")}*.css`,
         ],
         mergeStaticsConfig: true, // if you don't set this to true, you won't see any webpack-emitted assets in your serviceworker config
         dontCacheBustUrlsMatching: /./,
@@ -350,6 +351,10 @@ const clientConfig = {
             urlPattern: 'api/v1/check',
             handler: 'networkOnly',
           },
+          // {
+          //   urlPattern: /.css/g,
+          //   handler: 'cacheFirst',
+          // },
           {
             urlPattern: /api\/v1/g,
             handler: 'networkFirst',

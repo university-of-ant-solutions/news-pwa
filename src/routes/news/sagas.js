@@ -6,18 +6,12 @@ import {
 import {
   loadNewSuccess,
 } from './actions';
-import fetch from '../../utils/fetch';
 
-let apiUrl = 'https://news-pwa.particle4dev.com';
-
-if (__DEV__) {
-  apiUrl = 'http://localhost:3000';
-}
-export function* getNew({ id }) {
+export function* getNew({ fetch }, { id }) {
   try {
     process.env.BROWSER && NProgress.start();
     // Call our request helper (see 'utils/request')
-    const repos = yield call(fetch, `${apiUrl}/api/v1/news/${id}`);
+    const repos = yield call(fetch, `/api/v1/news/${id}`);
     yield put(loadNewSuccess(repos));
   } catch (err) {
     console.log(err);
@@ -26,9 +20,9 @@ export function* getNew({ id }) {
   process.env.BROWSER && NProgress.done();
 }
 
-export function* watchNewPage() {
+export function* watchNewPage(context) {
   const [fetchNew] = yield all([
-    takeLatest(LOAD_NEW, getNew),
+    takeLatest(LOAD_NEW, getNew, context),
   ]);
 
   // Suspend execution until location changes

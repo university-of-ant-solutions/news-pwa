@@ -29,7 +29,8 @@ export default function configureStore(initialState = {}, helpersConfig) {
   let enhancer;
 
   if (__DEV__) {
-    middleware.push(createLogger());
+    // only on browser
+    process.env.BROWSER && middleware.push(createLogger());
 
     // https://github.com/zalmoxisus/redux-devtools-extension#redux-devtools-extension
     let devToolsExtension = f => f;
@@ -48,7 +49,9 @@ export default function configureStore(initialState = {}, helpersConfig) {
   // See https://github.com/rackt/redux/releases/tag/v3.1.0
   store = createStore(createReducer(), fromJS(initialState), enhancer);
 
-  store.runSaga = sagaMiddleware.run;
+  store.runSaga = (saga, ...args) => {
+    return sagaMiddleware.run(saga, helpers, ...args);
+  };
   store.asyncReducers = {}; // Async reducer registry
 
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
