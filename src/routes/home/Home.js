@@ -49,12 +49,12 @@ class Home extends React.Component {
         <div className={s.newsListNav}>
           {
             currentPage <= 1 ? <a className={s.linkDisable}>&lt; prev</a> :
-            <Link to={`/?page=${currentPage - 1}`}>&lt; prev</Link>
+            <Link to={`?page=${currentPage - 1}`}>&lt; prev</Link>
           }
           <span> {currentPage} / { total } </span>
           {
             currentPage >= total ? <a className={s.linkDisable}>more &gt;</a> :
-            <Link to={`/?page=${currentPage + 1}`}>more &gt;</Link>
+            <Link to={`?page=${currentPage + 1}`}>more &gt;</Link>
           }
         </div>
         <div className={s.newsList}>
