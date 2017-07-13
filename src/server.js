@@ -4,6 +4,7 @@ import 'babel-polyfill';
 
 import path from 'path';
 import express from 'express';
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import compression from 'compression';
@@ -28,6 +29,9 @@ import config from './config';
 const resolve = file => path.resolve(__dirname, file);
 
 const app = express();
+
+// Enable All CORS Requests
+app.use(cors());
 
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
